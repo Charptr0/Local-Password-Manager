@@ -2,11 +2,13 @@ import database
 from writeFile import *
 from constants import *
 
-def terminateProgram(user_input): return user_input == "!q"
+def terminateProgram(user_input): 
+    print("The process has been terminated\n")
+    return user_input == "!q"
 
 def mainMenu():
     print(MAIN_MENU_PROMPT)
-    user_choice = input(MAIN_MENU_PROMPT)
+    user_choice = input(MAIN_MENU_CHOICES)
 
     try: return int(user_choice)
     except: return -1
@@ -25,7 +27,11 @@ def masterLogin():
 if __name__ == "__main__":
     
     while True:
+        main_choice = mainMenu()
 
-
-        masterLogin()
+        if main_choice == MAIN_MENU_LOGIN: masterLogin()
+        elif main_choice == MAIN_MENU_CREATE_NEW_USER: pass
+        elif main_choice == MAIN_MENU_DELETE_USER: pass
+        elif main_choice == MAIN_MENU_QUIT: break
+        else: print(UNKNOWN_CHOICE_ERR)
     
