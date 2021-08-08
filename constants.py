@@ -9,13 +9,21 @@ MAIN_MENU_CHOICES = '''1. Login
 4. Quit
 Input: '''
 
-
 UNKNOWN_CHOICE_ERR = "Unknown choice, please try again\n"
 
 MAIN_LOGIN_USERNAME_PROMPT = '''Type "!q" to terminate the process
 Master Username: '''
 
 MAIN_LOGIN_PASSWORD_PROMPT = '''Master Password: '''
+
+ADD_USER_PROMPT = '''=======================================
+Add a user to the database
+======================================='''
+
+ADD_USER_USERNAME_PROMPT = '''Type !q to terminate the process
+New Username: '''
+
+ADD_USER_PASSWORD_PROMPT = '''New Password: '''
 
 ##############################################################################################################
 #enums for main menu choices
