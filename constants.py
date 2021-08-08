@@ -24,6 +24,12 @@ MAIN_MENU_CREATE_NEW_USER = 2
 MAIN_MENU_DELETE_USER = 3
 MAIN_MENU_QUIT = 4
 
+#Error code enums
+NO_ERR = 0
+ERR_INVALID_USERNAME = 1
+ERR_INVALID_PASSWORD = 2
+ERR_USERNAME_ALREADY_EXIST = 3
+
 ##############################################################################################################
 #all collections of users
 LOGIN_DATABASE_NAME = "logins"
