@@ -26,20 +26,23 @@ def mainMenu():
     try: return int(user_choice) #try to return the selection as an int
     except: return -1 #cannot change to int, return a invalid option
 
+def userInterface(username, password):
+    pass
+
 def masterLogin():
     print(MAIN_MENU_PROMPT)
-    input_username = input(MAIN_LOGIN_USERNAME_PROMPT)
+    input_username = input(LOGIN_USERNAME_PROMPT)
 
     if terminateProgram(input_username): return #check for "!q"
 
-    input_password = input(MAIN_LOGIN_PASSWORD_PROMPT)
+    input_password = input(LOGIN_PASSWORD_PROMPT)
 
     if terminateProgram(input_password): return #check for "!q"
 
     error = database.isValidLogin(input_username, input_password)
 
     if error != NO_ERR: errorHandling(error)
-    else: print("yes")
+    else: userInterface(input_username, input_password)
 
 #add a new user to the database
 def addUser():
@@ -56,6 +59,21 @@ def addUser():
 
     if err != NO_ERR: errorHandling(err) #if something went wrong
 
+def deleteUser():
+    print(DELETE_USER_PROMPT)
+    username = input(LOGIN_USERNAME_PROMPT)
+
+    if terminateProgram(username): return
+
+    password = input(LOGIN_PASSWORD_PROMPT)
+
+    if terminateProgram(password): return
+
+    err = database.isValidLogin(username, password)
+
+    if err == NO_ERR: database.deleteUserFromDatabase(username)
+    else: errorHandling(err)
+
 #Main program
 if __name__ == "__main__":
     database.init() #initialize the database
@@ -65,6 +83,6 @@ if __name__ == "__main__":
 
         if main_choice == MAIN_MENU_LOGIN: masterLogin()
         elif main_choice == MAIN_MENU_CREATE_NEW_USER: addUser()
-        elif main_choice == MAIN_MENU_DELETE_USER: pass
+        elif main_choice == MAIN_MENU_DELETE_USER: deleteUser()
         elif main_choice == MAIN_MENU_QUIT: break
         else: print(UNKNOWN_CHOICE_ERR)

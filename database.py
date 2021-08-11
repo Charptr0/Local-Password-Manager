@@ -62,8 +62,19 @@ def addNewLogin(input_username, input_password):
         date_of_creation) VALUES (?, ?, ?)''', [input_username, input_password, getCurrentTime()])
 
         connection.commit()
-        print("Entry has been successfully added to the database")
+        print("Entry has been successfully added to the database\n")
     except Error as e: print(e)
     finally: connection.close()
 
     return NO_ERR
+
+def deleteUserFromDatabase(username):
+    connection = sqlite3.connect(LOGIN_PATH)
+    cursor = connection.cursor()
+
+    try:
+        cursor.execute('''DELETE FROM users WHERE username="{}"'''.format(username))
+        connection.commit()
+        print("Entry has been successfully deleted from the database\n")
+    except Error as e: print(e)
+    finally: connection.close()

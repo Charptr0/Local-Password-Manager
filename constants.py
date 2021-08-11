@@ -11,10 +11,10 @@ Input: '''
 
 UNKNOWN_CHOICE_ERR = "Unknown choice, please try again\n"
 
-MAIN_LOGIN_USERNAME_PROMPT = '''Type "!q" to terminate the process
+LOGIN_USERNAME_PROMPT = '''Type "!q" to terminate the process
 Master Username: '''
 
-MAIN_LOGIN_PASSWORD_PROMPT = '''Master Password: '''
+LOGIN_PASSWORD_PROMPT = '''Master Password: '''
 
 ADD_USER_PROMPT = '''=======================================
 Add a user to the database
@@ -24,6 +24,10 @@ ADD_USER_USERNAME_PROMPT = '''Type !q to terminate the process
 New Username: '''
 
 ADD_USER_PASSWORD_PROMPT = '''New Password: '''
+
+DELETE_USER_PROMPT = '''=======================================
+Delete a user from the database
+======================================='''
 
 ##############################################################################################################
 #enums for main menu choices
