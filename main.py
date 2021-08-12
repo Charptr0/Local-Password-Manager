@@ -26,8 +26,24 @@ def mainMenu():
     try: return int(user_choice) #try to return the selection as an int
     except: return -1 #cannot change to int, return a invalid option
 
-def userInterface(username, password):
-    pass
+def userMainMenu(username, password):
+    while True:
+        print("=======================================\nWelcome {}!\n=======================================\n".format(username))
+        user_choice = input(LOGIN_USER_CHOICES)
+
+        try: user_choice = int(user_choice)
+        except: 
+            print(UNKNOWN_CHOICE_ERR)
+            continue
+
+        if user_choice == GET_PASSWORD: pass
+        elif user_choice == ENTER_NEW_ENTRY: pass
+        elif user_choice == GET_ALL_ENTRY: pass
+        elif user_choice == DELETE_ENTRY: pass
+        elif user_choice == CHANGE_ENTRY: pass
+        elif user_choice == LOG_OUT: pass
+        else: print(UNKNOWN_CHOICE_ERR)
+
 
 def masterLogin():
     print(MAIN_MENU_PROMPT)
@@ -39,10 +55,10 @@ def masterLogin():
 
     if terminateProgram(input_password): return #check for "!q"
 
-    error = database.isValidLogin(input_username, input_password)
+    err = database.isValidLogin(input_username, input_password) #check for errors
 
-    if error != NO_ERR: errorHandling(error)
-    else: userInterface(input_username, input_password)
+    if err == NO_ERR: userMainMenu(input_username, input_password) #if no error, successfully log the user in
+    else: errorHandling(err) #print error
 
 #add a new user to the database
 def addUser():
@@ -57,22 +73,22 @@ def addUser():
 
     err = database.addNewLogin(new_username, new_password) #check for err when adding to the database
 
-    if err != NO_ERR: errorHandling(err) #if something went wrong
+    if err != NO_ERR: errorHandling(err) #print error
 
-def deleteUser():
+def deleteUser(): 
     print(DELETE_USER_PROMPT)
-    username = input(LOGIN_USERNAME_PROMPT)
+    username = input(LOGIN_USERNAME_PROMPT) #get username
 
     if terminateProgram(username): return
 
-    password = input(LOGIN_PASSWORD_PROMPT)
+    password = input(LOGIN_PASSWORD_PROMPT) #get password
 
     if terminateProgram(password): return
 
-    err = database.isValidLogin(username, password)
+    err = database.isValidLogin(username, password) #see if the user actually exist
 
-    if err == NO_ERR: database.deleteUserFromDatabase(username)
-    else: errorHandling(err)
+    if err == NO_ERR: database.deleteUserFromDatabase(username) #remove the user
+    else: errorHandling(err) #print error
 
 #Main program
 if __name__ == "__main__":

@@ -29,6 +29,14 @@ DELETE_USER_PROMPT = '''=======================================
 Delete a user from the database
 ======================================='''
 
+LOGIN_USER_CHOICES = '''1. Get a password
+2. Enter a new entry
+3. Get all entry
+4. Delete an entry
+5. Change an entry
+6. Log out/Back to main menu
+Input: '''
+
 ##############################################################################################################
 #enums for main menu choices
 MAIN_MENU_LOGIN = 1
@@ -41,6 +49,14 @@ NO_ERR = 0
 ERR_INVALID_USERNAME = 1
 ERR_INVALID_PASSWORD = 2
 ERR_USERNAME_ALREADY_EXIST = 3
+
+#user's main menu enums
+GET_PASSWORD = 1
+ENTER_NEW_ENTRY = 2
+GET_ALL_ENTRY = 3
+DELETE_ENTRY = 4
+CHANGE_ENTRY = 5
+LOG_OUT = 6
 
 ##############################################################################################################
 #all collections of users
