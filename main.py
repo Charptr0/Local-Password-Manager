@@ -15,6 +15,7 @@ def errorHandling(err_code):
     if err_code == ERR_INVALID_USERNAME: print("The username does not exist, please try again\n")
     elif err_code == ERR_INVALID_PASSWORD: print("The password does not match this username, please try again\n")
     elif err_code == ERR_USERNAME_ALREADY_EXIST: print("This username already exist, please try again\n")
+    elif err_code == ERR_ENTRY_DNE: print("Cannot find the desired entry in the database, please try again\n")
     else: return
 
 #print the main menu and show all main menu choices
@@ -36,24 +37,30 @@ def userMainMenu(username, password):
             print(UNKNOWN_CHOICE_ERR)
             continue
 
-        if user_choice == GET_PASSWORD: pass
-        elif user_choice == ENTER_NEW_ENTRY:
-            print(NEW_ENTRY_PROMPT)
-            name = input(NEW_ENTRY_NAME_PROMPT)
-            
-            if terminateProgram(name): continue
+        if user_choice == GET_PASSWORD: #get the password of a specific entry
+            entry_name = input("Enter the name of the entry: ")
 
-            new_entry_password = input(NEW_ENTRY_PASSOWRD_PROMPT)
+            data = database.getPassword(username, entry_name)
+            err = writePassword(data)
+            errorHandling(err)
+
+        elif user_choice == ENTER_NEW_ENTRY: #enter a new entry to the database
+            print(NEW_ENTRY_PROMPT)
+            name = input(NEW_ENTRY_NAME_PROMPT) #get the name of the entry
+            
+            if terminateProgram(name): continue #check for !q
+
+            new_entry_password = input(NEW_ENTRY_PASSWORD_PROMPT) #get the password 
 
             if terminateProgram(new_entry_password): continue
 
-            additional_notes = input(NEW_ENTRY_NOTES_PROMPT)
+            additional_notes = input(NEW_ENTRY_NOTES_PROMPT) #get any notes that the user left
 
             if terminateProgram(additional_notes): continue
 
-            database.enterNewEntries(username, name, new_entry_password, additional_notes)
+            database.enterNewEntries(username, name, new_entry_password, additional_notes) #add to database
 
-        elif user_choice == GET_ALL_ENTRY:
+        elif user_choice == GET_ALL_ENTRY: #get all entry, the name, password, and the notes
             data = database.getAllEntries(username)
             writeAllEntries(data)
 

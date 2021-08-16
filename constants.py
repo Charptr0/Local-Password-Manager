@@ -44,7 +44,7 @@ Enter a new entry to the database
 
 NEW_ENTRY_NAME_PROMPT = '''Type !q to terminate the process
 Name of the entry: '''
-NEW_ENTRY_PASSOWRD_PROMPT = '''Password: '''
+NEW_ENTRY_PASSWORD_PROMPT = '''Password: '''
 NEW_ENTRY_NOTES_PROMPT = '''Additional notes (Optional): '''
 
 ##############################################################################################################
@@ -59,6 +59,7 @@ NO_ERR = 0
 ERR_INVALID_USERNAME = 1
 ERR_INVALID_PASSWORD = 2
 ERR_USERNAME_ALREADY_EXIST = 3
+ERR_ENTRY_DNE = 4
 
 #user's main menu enums
 GET_PASSWORD = 1

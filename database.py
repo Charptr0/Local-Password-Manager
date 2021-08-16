@@ -118,3 +118,17 @@ def getAllEntries(username):
     finally: connection.close()
 
     return data
+
+def getPassword(username, entry_name):
+    connection = sqlite3.connect("users/" + username + ".db")
+    cursor = connection.cursor()
+
+    data = []
+    
+    try:
+        cursor.execute('''SELECT password,notes FROM entries WHERE name="{}"'''.format(entry_name))
+        data = cursor.fetchall()
+    except Error as e: print(e)
+    finally: connection.close()
+
+    return data
