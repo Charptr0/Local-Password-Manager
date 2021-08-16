@@ -34,7 +34,8 @@ LOGIN_USER_CHOICES = '''1. Get a password
 3. Get all entry
 4. Delete an entry
 5. Change an entry
-6. Log out/Back to main menu
+6. Change Password
+7. Log out/Back to main menu
 Input: '''
 
 ##############################################################################################################
@@ -56,7 +57,8 @@ ENTER_NEW_ENTRY = 2
 GET_ALL_ENTRY = 3
 DELETE_ENTRY = 4
 CHANGE_ENTRY = 5
-LOG_OUT = 6
+CHANGE_MASTER_PASSWORD = 6
+LOG_OUT = 7
 
 ##############################################################################################################
 #all collections of users

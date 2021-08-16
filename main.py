@@ -38,10 +38,14 @@ def userMainMenu(username, password):
 
         if user_choice == GET_PASSWORD: pass
         elif user_choice == ENTER_NEW_ENTRY: pass
-        elif user_choice == GET_ALL_ENTRY: pass
+        elif user_choice == GET_ALL_ENTRY:
+            data = database.getAllEntries(username)
+            writeAllEntries(data)
+
         elif user_choice == DELETE_ENTRY: pass
         elif user_choice == CHANGE_ENTRY: pass
-        elif user_choice == LOG_OUT: pass
+        elif user_choice == CHANGE_MASTER_PASSWORD: pass
+        elif user_choice == LOG_OUT: break
         else: print(UNKNOWN_CHOICE_ERR)
 
 

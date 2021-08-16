@@ -10,6 +10,7 @@ def getCurrentTime(): return datetime.today().strftime('%Y-%m-%d')
 
 def init():
     if not os.path.exists("users/"): os.makedirs("users/") #create the user/ dir if not exist
+    if not os.path.exists("output/"): os.makedirs("output/") #create the output/ dir if not exist
 
     #secure a connection to the database
     connection = sqlite3.connect(LOGIN_PATH)
@@ -62,6 +63,20 @@ def addNewLogin(input_username, input_password):
         date_of_creation) VALUES (?, ?, ?)''', [input_username, input_password, getCurrentTime()])
 
         connection.commit()
+    except Error as e: print(e)
+    finally: connection.close()
+
+    connection = sqlite3.connect("users/" + input_username + ".db")
+    cursor = connection.cursor()
+
+    try:
+        cursor.execute('''CREATE TABLE IF NOT EXISTS entries(
+            name TEXT NOT NULL,
+            password TEXT NOT NULL,
+            notes TEXT)
+            ''')
+
+        connection.commit()
         print("Entry has been successfully added to the database\n")
     except Error as e: print(e)
     finally: connection.close()
@@ -78,3 +93,17 @@ def deleteUserFromDatabase(username):
         print("Entry has been successfully deleted from the database\n")
     except Error as e: print(e)
     finally: connection.close()
+
+def getAllEntries(username):
+    connection = sqlite3.connect("users/ " + username + "db")
+    cursor = connection.cursor()
+
+    data = []
+    
+    try:
+        cursor.execute('''SELECT name,password,notes FROM entries''')
+        data = cursor.fetchall()
+    except Error as e: print(e)
+    finally: connection.close()
+
+    return data
