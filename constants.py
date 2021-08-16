@@ -38,6 +38,15 @@ LOGIN_USER_CHOICES = '''1. Get a password
 7. Log out/Back to main menu
 Input: '''
 
+NEW_ENTRY_PROMPT = '''=======================================
+Enter a new entry to the database
+======================================='''
+
+NEW_ENTRY_NAME_PROMPT = '''Type !q to terminate the process
+Name of the entry: '''
+NEW_ENTRY_PASSOWRD_PROMPT = '''Password: '''
+NEW_ENTRY_NOTES_PROMPT = '''Additional notes (Optional): '''
+
 ##############################################################################################################
 #enums for main menu choices
 MAIN_MENU_LOGIN = 1

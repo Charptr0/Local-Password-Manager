@@ -37,7 +37,22 @@ def userMainMenu(username, password):
             continue
 
         if user_choice == GET_PASSWORD: pass
-        elif user_choice == ENTER_NEW_ENTRY: pass
+        elif user_choice == ENTER_NEW_ENTRY:
+            print(NEW_ENTRY_PROMPT)
+            name = input(NEW_ENTRY_NAME_PROMPT)
+            
+            if terminateProgram(name): continue
+
+            new_entry_password = input(NEW_ENTRY_PASSOWRD_PROMPT)
+
+            if terminateProgram(new_entry_password): continue
+
+            additional_notes = input(NEW_ENTRY_NOTES_PROMPT)
+
+            if terminateProgram(additional_notes): continue
+
+            database.enterNewEntries(username, name, new_entry_password, additional_notes)
+
         elif user_choice == GET_ALL_ENTRY:
             data = database.getAllEntries(username)
             writeAllEntries(data)

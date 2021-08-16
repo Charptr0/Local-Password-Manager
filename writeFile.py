@@ -27,4 +27,4 @@ def writeAllEntries(entries):
 
             f.write(data)
 
-    print("Your request is in Output/{}.txt".format("requestFileName"))
+    print("Your request is in Output/{}.txt".format(requestFileName))

@@ -1,6 +1,6 @@
 import sqlite3
 import os
-from sqlite3.dbapi2 import Error
+from sqlite3.dbapi2 import Error, connect
 from constants import *
 from datetime import datetime
 
@@ -94,8 +94,19 @@ def deleteUserFromDatabase(username):
     except Error as e: print(e)
     finally: connection.close()
 
+def enterNewEntries(username, name, password, notes):
+    connection = sqlite3.connect("users/" + username + ".db")
+    cursor = connection.cursor()
+
+    try:
+        cursor.execute('''INSERT INTO entries(name, password, notes) VALUES (?,?,?)''', [name, password, notes])
+        connection.commit()
+        print("Entry has been successfully added from the database\n")
+    except Error as e: print(e)
+    finally: connection.close()
+
 def getAllEntries(username):
-    connection = sqlite3.connect("users/ " + username + "db")
+    connection = sqlite3.connect("users/" + username + ".db")
     cursor = connection.cursor()
 
     data = []
