@@ -34,8 +34,9 @@ LOGIN_USER_CHOICES = '''1. Get a password
 3. Get all entry
 4. Delete an entry
 5. Change an entry
-6. Change Password
+6. Change master password
 7. Log out/Back to main menu
+8. Exit program (Use this to exit program)
 Input: '''
 
 NEW_ENTRY_PROMPT = '''=======================================
@@ -46,6 +47,13 @@ NEW_ENTRY_NAME_PROMPT = '''Type !q to terminate the process
 Name of the entry: '''
 NEW_ENTRY_PASSWORD_PROMPT = '''Password: '''
 NEW_ENTRY_NOTES_PROMPT = '''Additional notes (Optional): '''
+
+CHANGE_MASTER_PASSWORD_PROMPT = '''=======================================
+Change Master Password
+======================================='''
+
+OLD_PASSWORD_PROMPT = '''Type !q to terminate the process
+Old Password: '''
 
 ##############################################################################################################
 #enums for main menu choices
@@ -69,6 +77,7 @@ DELETE_ENTRY = 4
 CHANGE_ENTRY = 5
 CHANGE_MASTER_PASSWORD = 6
 LOG_OUT = 7
+EXIT_PROGRAM = 8
 
 ##############################################################################################################
 #all collections of users

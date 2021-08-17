@@ -1,6 +1,6 @@
 import sqlite3
 import os
-from sqlite3.dbapi2 import Error, connect
+from sqlite3.dbapi2 import Error
 from constants import *
 from datetime import datetime
 
@@ -132,3 +132,14 @@ def getPassword(username, entry_name):
     finally: connection.close()
 
     return data
+
+def changeMasterPassword(username, new_password):
+    connection = sqlite3.connect(LOGIN_PATH)
+    cursor = connection.cursor()
+
+    try:
+        cursor.execute('''UPDATE users SET password="{}" WHERE username="{}"'''.format(new_password, username))
+        connection.commit()
+        print("Successfully updated password\n")
+    except Error as e: print(e)
+    finally: connection.close()

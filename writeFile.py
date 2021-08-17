@@ -1,5 +1,6 @@
 import random
 from constants import ERR_ENTRY_DNE, NO_ERR
+import shutil
 
 #generate a random 10 digit string file name
 def generateID():
@@ -50,3 +51,7 @@ def writePassword(entry):
 
     print("Your request is in Output/{}.txt".format(requestFileName))
     return NO_ERR
+
+def removeOutputFolder(): 
+    try: shutil.rmtree('output/')
+    except: return

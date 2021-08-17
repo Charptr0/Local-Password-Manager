@@ -2,6 +2,8 @@ import database
 from writeFile import *
 from constants import *
 
+quit = False
+
 #if the user enter "!q" return true to terminate the current process
 def terminateProgram(user_input): 
     if user_input == "!q":
@@ -66,10 +68,30 @@ def userMainMenu(username, password):
 
         elif user_choice == DELETE_ENTRY: pass
         elif user_choice == CHANGE_ENTRY: pass
-        elif user_choice == CHANGE_MASTER_PASSWORD: pass
-        elif user_choice == LOG_OUT: break
-        else: print(UNKNOWN_CHOICE_ERR)
+        elif user_choice == CHANGE_MASTER_PASSWORD:
+            print(CHANGE_MASTER_PASSWORD_PROMPT)
+            old_password = input(OLD_PASSWORD_PROMPT)
 
+            if terminateProgram(old_password): continue
+            if old_password != password: 
+                print("The old password does not match\n")
+                continue
+
+            new_password = input("New " + LOGIN_PASSWORD_PROMPT)
+
+            if terminateProgram(new_password): continue
+
+            database.changeMasterPassword(username, new_password)
+            return
+
+        elif user_choice == LOG_OUT: return
+        elif user_choice == EXIT_PROGRAM:
+            global quit
+            removeOutputFolder()
+            quit = True
+            return
+
+        else: print(UNKNOWN_CHOICE_ERR)
 
 def masterLogin():
     print(MAIN_MENU_PROMPT)
@@ -120,7 +142,7 @@ def deleteUser():
 if __name__ == "__main__":
     database.init() #initialize the database
 
-    while True:
+    while not quit:
         main_choice = mainMenu() 
 
         if main_choice == MAIN_MENU_LOGIN: masterLogin()
