@@ -108,16 +108,12 @@ def enterNewEntries(username, name, password, notes):
 def getAllEntries(username):
     connection = sqlite3.connect("users/" + username + ".db")
     cursor = connection.cursor()
-
-    data = []
     
     try:
         cursor.execute('''SELECT name,password,notes FROM entries''')
-        data = cursor.fetchall()
+        return cursor.fetchall()
     except Error as e: print(e)
     finally: connection.close()
-
-    return data
 
 def getPassword(username, entry_name):
     connection = sqlite3.connect("users/" + username + ".db")
@@ -144,6 +140,21 @@ def changeMasterPassword(username, new_password):
     except Error as e: print(e)
     finally: connection.close()
 
+#check if the given name exist in the database
+def validName(username, name):
+    connection = sqlite3.connect("users/" + username + ".db")
+    cursor = connection.cursor()
+
+    try:
+        cursor.execute('''SELECT * FROM entries WHERE name="{}"'''.format(name))
+        data = cursor.fetchall()
+        if len(data) != 0: return True 
+        else: return False
+
+    except Error as e: print(e)
+    finally: connection.close()
+
+#delete an entry from the database
 def deleteEntry(username, name):
     connection = sqlite3.connect("users/" + username + ".db")
     cursor = connection.cursor()
@@ -152,5 +163,17 @@ def deleteEntry(username, name):
         cursor.execute('''DELETE FROM entries WHERE name="{}"'''.format(name))
         connection.commit()
         print("Successfully deleted entry from the database\n")
+    except Error as e: print(e)
+    finally: connection.close()
+
+#change the password of a given entry
+def changeEntry(username, name, new_password):
+    connection = sqlite3.connect("users/" + username + ".db")
+    cursor = connection.cursor()
+
+    try:
+        cursor.execute('''UPDATE entries SET password={} WHERE name="{}"'''.format(new_password, name))
+        connection.commit()
+        print("Successfully changed the entry from the database\n")
     except Error as e: print(e)
     finally: connection.close()

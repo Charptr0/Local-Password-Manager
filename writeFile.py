@@ -27,11 +27,11 @@ def writeAllEntries(entries):
     else:
         with open("output/" + requestFileName + ".txt", "w") as f: #write to file
             for i in range(len(entries)):
-                data += entries[i][NAME] + "\t" + entries[i][PASSWORD] + "\t" + entries[i][NOTES]
+                data += entries[i][NAME] + "\t" + entries[i][PASSWORD] + "\t" + entries[i][NOTES] + "\n"
 
             f.write(data)
 
-    print("Your request is in Output/{}.txt".format(requestFileName))
+    print("Your request is in output/{}.txt".format(requestFileName))
 
 def writePassword(entry):
     #enums
@@ -49,7 +49,7 @@ def writePassword(entry):
 
         f.write(data)
 
-    print("Your request is in Output/{}.txt".format(requestFileName))
+    print("Your request is in output/{}.txt".format(requestFileName))
     return NO_ERR
 
 def removeOutputFolder(): 

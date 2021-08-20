@@ -81,7 +81,23 @@ def userMainMenu(username, password):
             
             database.deleteEntry(username, name)
 
-        elif user_choice == CHANGE_ENTRY: pass
+        elif user_choice == CHANGE_ENTRY:
+            print(CHANGE_ENTRY_PROMPT)
+
+            name = input(ENTRY_NAME_PROMPT)
+
+            if terminateProgram(name): continue
+
+            if not database.validName(username, name):
+                print("The name of the entry does not exist in the database\n")
+                continue
+
+            new_password = input("New Password: ")
+
+            if terminateProgram(new_password): continue
+
+            database.changeEntry(username, name, new_password)
+
         elif user_choice == CHANGE_MASTER_PASSWORD:
             print(CHANGE_MASTER_PASSWORD_PROMPT)
             old_password = input(OLD_PASSWORD_PROMPT)
@@ -162,5 +178,7 @@ if __name__ == "__main__":
         if main_choice == MAIN_MENU_LOGIN: masterLogin()
         elif main_choice == MAIN_MENU_CREATE_NEW_USER: addUser()
         elif main_choice == MAIN_MENU_DELETE_USER: deleteUser()
-        elif main_choice == MAIN_MENU_QUIT: break
+        elif main_choice == MAIN_MENU_QUIT:
+            removeOutputFolder()
+            break
         else: print(UNKNOWN_CHOICE_ERR)
