@@ -43,9 +43,9 @@ NEW_ENTRY_PROMPT = '''=======================================
 Enter a new entry to the database
 ======================================='''
 
-NEW_ENTRY_NAME_PROMPT = '''Type !q to terminate the process
+ENTRY_NAME_PROMPT = '''Type !q to terminate the process
 Name of the entry: '''
-NEW_ENTRY_PASSWORD_PROMPT = '''Password: '''
+ENTRY_PASSWORD_PROMPT = '''Password: '''
 NEW_ENTRY_NOTES_PROMPT = '''Additional notes (Optional): '''
 
 CHANGE_MASTER_PASSWORD_PROMPT = '''=======================================
@@ -54,6 +54,10 @@ Change Master Password
 
 OLD_PASSWORD_PROMPT = '''Type !q to terminate the process
 Old Password: '''
+
+DELETE_ENTRY_PROMPT = '''=======================================
+Delete an entry from the database
+======================================='''
 
 ##############################################################################################################
 #enums for main menu choices

@@ -48,11 +48,11 @@ def userMainMenu(username, password):
 
         elif user_choice == ENTER_NEW_ENTRY: #enter a new entry to the database
             print(NEW_ENTRY_PROMPT)
-            name = input(NEW_ENTRY_NAME_PROMPT) #get the name of the entry
+            name = input(ENTRY_NAME_PROMPT) #get the name of the entry
             
             if terminateProgram(name): continue #check for !q
 
-            new_entry_password = input(NEW_ENTRY_PASSWORD_PROMPT) #get the password 
+            new_entry_password = input(ENTRY_PASSWORD_PROMPT) #get the password 
 
             if terminateProgram(new_entry_password): continue
 
@@ -66,7 +66,21 @@ def userMainMenu(username, password):
             data = database.getAllEntries(username)
             writeAllEntries(data)
 
-        elif user_choice == DELETE_ENTRY: pass
+        elif user_choice == DELETE_ENTRY:
+            print(DELETE_ENTRY_PROMPT)
+
+            name = input(ENTRY_NAME_PROMPT)
+
+            if terminateProgram(name): continue
+
+            confirmed_master_password = input("Confirm " + LOGIN_PASSWORD_PROMPT)
+
+            if confirmed_master_password != password:
+                print("The old password does not match\n")
+                continue
+            
+            database.deleteEntry(username, name)
+
         elif user_choice == CHANGE_ENTRY: pass
         elif user_choice == CHANGE_MASTER_PASSWORD:
             print(CHANGE_MASTER_PASSWORD_PROMPT)

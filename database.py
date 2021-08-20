@@ -143,3 +143,14 @@ def changeMasterPassword(username, new_password):
         print("Successfully updated password\n")
     except Error as e: print(e)
     finally: connection.close()
+
+def deleteEntry(username, name):
+    connection = sqlite3.connect("users/" + username + ".db")
+    cursor = connection.cursor()
+
+    try:
+        cursor.execute('''DELETE FROM entries WHERE name="{}"'''.format(name))
+        connection.commit()
+        print("Successfully deleted entry from the database\n")
+    except Error as e: print(e)
+    finally: connection.close()
